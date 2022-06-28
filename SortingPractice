@@ -1,0 +1,139 @@
+#include<iostream>
+
+using namespace std;
+
+
+// BUBBLE SORT
+
+void bubbleSort(int arr[], int size)
+{
+	int temp;
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = i + 1; j < size; j++)
+		{
+			if (arr[j] < arr[i])
+			{
+				temp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = temp;
+			}
+		}
+	}
+	cout << "\n Array Sorted Using BUBBLE SORT \n";
+	for (int i = 0; i < size; i++)
+	{
+		cout << arr[i] << "\t";
+	}
+}
+
+//  SELECTION SORT
+
+void selectionSort(int arr[], int size)
+{
+	int temp, min,pos;
+	for (int i = 0; i < size; i++)
+	{
+		min = arr[i];
+		pos = i;
+		for (int j = i + 1; j < size; j++)
+		{
+			if (min > arr[j])
+			{
+				min = arr[j];
+				pos = j;
+			}
+		}
+		temp = arr[i];
+		arr[i] = arr[pos];
+		arr[pos] = temp;
+	}
+	cout << "\n Array Sorted Using SELECTION SORT \n";
+	for (int i = 0; i < size; i++)
+	{
+		cout << arr[i] << "\t";
+	}
+	
+}
+
+// INSERTION SORT
+
+void insertionSort(int arr[], int size)
+{
+	int temp,i,j;
+	for (i = 0 ; i < size; i++)
+	{
+		temp = arr[i];
+		j = i - 1;
+		while (temp < arr[j] && j>=0)
+		{
+			arr[j + 1] = arr[j];
+			j = j - 1;
+		}
+		arr[j + 1] = temp;
+	}
+	cout << "\n Array Sorted Using INSERTION SORT \n";
+	for (int i = 0; i < size; i++)
+	{
+		cout << arr[i] << "\t";
+	}
+
+}
+
+// QUICK SORT (DIVIDE AND CONQUER APPROACH)
+int divide(int arr[], int start, int end)
+{
+	int pivot = arr[end];
+	int index = start;
+	for (int i = start; i < end; i++)
+	{
+		if (arr[i] < pivot)
+		{
+			int temp = arr[i];
+			arr[i] = arr[index];
+			arr[index] = temp;
+			index++;
+		}
+	}
+	int temp = arr[end];
+	arr[end] = arr[index];
+	arr[index] = temp;
+
+	return index;
+}
+void quickSort(int arr[], int start,int end)
+{
+	if (start < end)
+	{
+		int div = divide(arr, start, end);
+		quickSort(arr, start, (div - 1));
+		quickSort(arr, (div + 1), end);
+		
+	}
+
+	
+
+
+	
+}
+
+int main()
+{
+	cout << "\n--------------------SORTING ALGO PRATICE----------------------->>1st Is BUBBLE SORT::";
+	int arr[] = { 12,3,1,5,18,10,0,-35 };
+	int size = sizeof(arr) / sizeof(arr[0]);
+	cout << "\n\nArray Before Sorting :: \n";
+	for (int i = 0; i < size; i++)
+		cout << arr[i] << "\t";
+
+	bubbleSort(arr, size);
+	selectionSort(arr, size);
+	insertionSort(arr, size);
+	quickSort(arr,0, size-1);
+	cout << "\n Array Sorted Using QUICK SORT \n";
+	for (int i = 0; i < size; i++)
+	{
+		cout << arr[i] << "\t";
+	}
+	return 0;
+}
